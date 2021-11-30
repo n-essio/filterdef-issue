@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgresql:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: getting-started_password
+      POSTGRES_USER: getting-started_user
+      POSTGRES_DB: getting-started
+    ports:
+      - '5432:5432'
+  pgadmin4:
+    image: dpage/pgadmin4
+    ports:
+      - '80:80'
+    links:
+      - postgresql:postgresql
+    depends_on:
+      - postgresql
+    environment:
+      PGADMIN_DEFAULT_EMAIL: getting-started@example.com
+      PGADMIN_DEFAULT_PASSWORD: getting-started
