@@ -15,12 +15,20 @@ issue: https://github.com/n-essio/queryable/issues/21
    - @FilterDef(name = "obj.active", parameters = @ParamDef(name = "active", type = "string"))
    - @Filter(name = "obj.active", condition = "active = :active")
 
-When we run the link:
-- http://localhost:8080/hello
+To test:
+- docker-compose -f docker/docker-compose.yaml up
+- mvn quarkus:dev
+
+Open the browser link:
+- http://localhost:8080/hello/init [to populate the db]
+- http://localhost:8080/hello  [to view the error]
 
 SOLUTIONS:
 - queryable should generate @FilterDef(name = "obj.active") => @FilterDef(name = "Entity.obj.active")
 - and in the method getSearch() => filter enabling should be: earch.filter("Entity.obj.code", Parameters.with("code", get("obj.code"))); 
+
+
+
 
 The error that we have with same FilterDef name, but different type:
 
